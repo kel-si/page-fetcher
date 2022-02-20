@@ -1,15 +1,22 @@
 //Use Node's fs (file system) module to write the file
 const fs = require('fs');
-const url = process.arg[2];
-const filePath = process.arg[3];
-const fileSize = body.length;
+const url = process.argv[2];
+const filePath = process.argv[3];
+const request = require('request');
+const content = "content";
 
-
-const request = (url, (error, response, body) => {
-  console.log("Error:", error);
-  console.log("Response:", response);
-  console.log("Body:", body); 
+request(url, (error, response, body) => {
+  const fileSize = body.length;
+  fs.writeFile(filePath, content, error => {
+    if (error) {
+      console.log("error:", error);
+      return;
+    }
 });
+
+console.log(`Downloaded and saved ${fileSize} to ${filePath}`);
+})
+ 
 
 //1. You need to make an http request and wait for the response.
 
